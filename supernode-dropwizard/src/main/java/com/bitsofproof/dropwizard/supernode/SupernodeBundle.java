@@ -1,8 +1,7 @@
-package com.bitsofproof.wallet.dw.bundles.supernode;
+package com.bitsofproof.dropwizard.supernode;
 
 import com.bitsofproof.supernode.api.BCSAPI;
 import com.bitsofproof.supernode.api.BCSAPIException;
-import com.bitsofproof.wallet.dw.WalletConfiguration;
 import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
@@ -56,6 +55,7 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 	@Override
 	public void initialize (Bootstrap<?> bootstrap)
 	{
+
 	}
 
 }

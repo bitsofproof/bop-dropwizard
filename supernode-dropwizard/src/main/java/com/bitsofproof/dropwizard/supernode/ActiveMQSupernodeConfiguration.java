@@ -2,6 +2,7 @@ package com.bitsofproof.dropwizard.supernode;
 
 import com.bitsofproof.supernode.api.BCSAPI;
 import com.bitsofproof.supernode.api.JMSServerConnector;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Preconditions;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.pool.PooledConnectionFactory;
@@ -10,10 +11,13 @@ import javax.jms.ConnectionFactory;
 
 public class ActiveMQSupernodeConfiguration implements SupernodeConfiguration
 {
+	@JsonProperty
 	private String brokerUrl;
 
+	@JsonProperty
 	private String username;
 
+	@JsonProperty
 	private String password;
 
 	public ManagedBCSAPI createBCSAPI ()
