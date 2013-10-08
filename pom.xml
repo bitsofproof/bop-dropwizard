@@ -6,6 +6,7 @@
 	<artifactId>bop-dropwizard</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<modules>
+		<module>shiro-jdbi-realm</module>
 		<module>shiro-dropwizard</module>
 	</modules>
 	<packaging>pom</packaging>
@@ -14,6 +15,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dropwizard.version>0.7.0-SNAPSHOT</dropwizard.version>
 		<guava.version>15.0</guava.version>
+		<shiro.version>1.2.2</shiro.version>
 	</properties>
 
 	<dependencyManagement>
@@ -41,6 +43,11 @@
 				<scope>test</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-web</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

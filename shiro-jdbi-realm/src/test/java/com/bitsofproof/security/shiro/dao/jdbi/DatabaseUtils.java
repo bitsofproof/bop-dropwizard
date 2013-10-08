@@ -41,7 +41,7 @@ public class DatabaseUtils {
     private static final String DB_USER_NAME = "sa";
     private static final String DB_PASSWORD = "";
 
-    private static final String CHANGE_LOG = "src/main/resources/liquibase/master.xml";
+    private static final String CHANGE_LOG = "src/main/resources/liquibase/shiro/master.xml";
     private static final String TEST_DATA_CHANGE_LOG = "src/test/resources/liquibase/test_changeset_2-5.sql";
 
     protected Properties dbProperties = null;
