@@ -21,14 +21,14 @@ public class ShiroConfiguration {
 	 * Default is {@code false}.
 	 */
 	@JsonProperty
-	private boolean enabled = false;
+	boolean enabled = false;
 
 	// could support more than one pattern ...
 	/**
 	 * Default is {@link #DEFAULT_SECURED_URL_PATTERN}.
 	 */
 	@JsonProperty("secured_url_pattern")
-	private String securedUrlPattern = DEFAULT_SECURED_URL_PATTERN;
+	String securedUrlPattern = DEFAULT_SECURED_URL_PATTERN;
 
 	/**
 	 * Whether this bundle is enabled.

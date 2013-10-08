@@ -14,11 +14,10 @@ import org.slf4j.LoggerFactory;
 /**
  * A simple bundle class to initialze Shiro within Dropwizard.
  */
-public abstract class ShiroBundle<T extends Configuration>
-		implements ConfiguredBundle<T>, ConfigurationStrategy<T>
+public abstract class ShiroBundle<T extends Configuration> implements ConfiguredBundle<T>, ConfigurationStrategy<T>
 {
 
-	private static final Logger LOG = LoggerFactory.getLogger ( ShiroBundle.class );
+	private static final Logger log = LoggerFactory.getLogger ( ShiroBundle.class );
 
 	/**
 	 * This method is a no-op. All functionality is in the {@link #run(Object, Environment)} method.
@@ -45,12 +44,12 @@ public abstract class ShiroBundle<T extends Configuration>
 		final Optional<ShiroConfiguration> shiroConfig = getShiroConfiguration ( configuration );
 		if (shiroConfig.isPresent ())
 		{
-			LOG.debug ( "Shiro is configured: {}", shiroConfig );
+			log.debug ( "Shiro is configured: {}", shiroConfig );
 			initializeShiro ( shiroConfig.get (), environment );
 		}
 		else
 		{
-			LOG.debug ( "Shiro is not configured" );
+			log.debug ( "Shiro is not configured" );
 		}
 	}
 
@@ -58,21 +57,21 @@ public abstract class ShiroBundle<T extends Configuration>
 	{
 		if (config.isEnabled ())
 		{
-			LOG.debug ( "Shiro is enabled" );
+			log.debug ( "Shiro is enabled" );
 
 			// This line ensure Shiro is configured and its .ini file found in the designated location.
 			// e.g., via the shiroConfigLocations ContextParameter with fall-backs to default locations if that parameter isn't specified.
 			environment.servlets ().addServletListeners ( new EnvironmentLoaderListener () );
 
 			final String filterUrlPattern = config.getSecuredUrlPattern ();
-			LOG.debug ( "ShiroFilter will check URLs matching '{}'.", filterUrlPattern );
+			log.debug ( "ShiroFilter will check URLs matching '{}'.", filterUrlPattern );
 			environment.servlets ()
 			           .addFilter ( "shiro-filter", new ShiroFilter () )
 			           .addMappingForUrlPatterns ( null, false, filterUrlPattern );
 		}
 		else
 		{
-			LOG.debug ( "Shiro is not enabled" );
+			log.debug ( "Shiro is not enabled" );
 		}
 	}
 
