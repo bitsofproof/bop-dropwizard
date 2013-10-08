@@ -19,6 +19,13 @@
 		<shiro.version>1.2.2</shiro.version>
 	</properties>
 
+	<repositories>
+		<repository>
+			<id>bitsofproof</id>
+			<name>Bits of Proof Repository</name>
+			<url>http://maven.bitsofproof.com/maven</url>
+		</repository></repositories>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

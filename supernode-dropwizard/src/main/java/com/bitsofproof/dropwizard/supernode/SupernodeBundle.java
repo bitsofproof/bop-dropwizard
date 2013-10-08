@@ -55,7 +55,5 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 	@Override
 	public void initialize (Bootstrap<?> bootstrap)
 	{
-
 	}
-
 }
