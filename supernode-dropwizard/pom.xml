@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>bop-dropwizard</artifactId>
+		<groupId>com.bitsofproof.dropwizard</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.bitsofproof.dropwizard</groupId>
+	<artifactId>supernode-dropwizard</artifactId>
+
+	<properties>
+		<supernode.version>1.2.6</supernode.version>
+		<activemq.version>5.8.0</activemq.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.bitsofproof</groupId>
+			<artifactId>bitsofproof-server-api</artifactId>
+			<version>${supernode.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+
+
+	</dependencies>
+</project>

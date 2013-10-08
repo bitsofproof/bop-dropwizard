@@ -8,6 +8,7 @@
 	<modules>
 		<module>shiro-jdbi-realm</module>
 		<module>shiro-dropwizard</module>
+		<module>supernode-dropwizard</module>
 	</modules>
 	<packaging>pom</packaging>
 
