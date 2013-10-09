@@ -19,10 +19,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-core</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>com.bitsofproof</groupId>
 			<artifactId>bitsofproof-server-api</artifactId>
 			<version>${supernode.version}</version>
@@ -31,6 +27,15 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
 			<version>${activemq.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-validation</artifactId>
 		</dependency>
 
 
