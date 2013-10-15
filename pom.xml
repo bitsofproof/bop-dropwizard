@@ -21,6 +21,12 @@
 
 	<repositories>
 		<repository>
+			<id>sonatype-oss-public</id>
+			<name>Sonatype Public</name>
+			<url>http://oss.sonatype.org/content/groups/public/</url>
+		</repository>
+
+		<repository>
 			<id>bitsofproof</id>
 			<name>Bits of Proof Repository</name>
 			<url>http://maven.bitsofproof.com/maven</url>
