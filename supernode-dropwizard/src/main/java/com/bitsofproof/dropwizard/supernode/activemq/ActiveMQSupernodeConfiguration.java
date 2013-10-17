@@ -32,12 +32,11 @@
  * fitness for a particular purpose and non-infringement.
  */
 
-package com.bitsofproof.dropwizard.supernode;
+package com.bitsofproof.dropwizard.supernode.activemq;
 
-import com.bitsofproof.supernode.api.BCSAPI;
-import com.bitsofproof.supernode.api.JMSServerConnector;
+import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
+import com.bitsofproof.dropwizard.supernode.SupernodeConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Preconditions;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.pool.PooledConnectionFactory;
 
@@ -59,39 +58,7 @@ public class ActiveMQSupernodeConfiguration implements SupernodeConfiguration
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory ( username, password, brokerUrl );
 		final ConnectionFactory pooledConnectionFactory = new PooledConnectionFactory ( connectionFactory );
 
-		return new ManagedBCSAPI ()
-		{
-			public JMSServerConnector connector;
-
-			@Override
-			public BCSAPI getBCSAPI ()
-			{
-				Preconditions.checkState ( connector != null, "BCSAPI stopped" );
-				return connector;
-			}
-
-			@Override
-			public void start () throws Exception
-			{
-				if (connector == null)
-				{
-					connector = new JMSServerConnector ();
-					connector.setConnectionFactory ( pooledConnectionFactory );
-					connector.init ();
-					connector.isProduction ();
-				}
-			}
-
-			@Override
-			public void stop () throws Exception
-			{
-				if (connector != null)
-				{
-					connector.destroy ();
-					connector = null;
-				}
-			}
-		};
+		return new ActiveMQManagedBCSAPI ( pooledConnectionFactory );
 	}
 
 	public String getBrokerUrl ()

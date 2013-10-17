@@ -32,68 +32,60 @@
  * fitness for a particular purpose and non-infringement.
  */
 
-package com.bitsofproof.dropwizard.supernode;
+package com.bitsofproof.dropwizard.supernode.activemq;
 
+import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
 import com.bitsofproof.supernode.api.BCSAPI;
-import com.bitsofproof.supernode.api.BCSAPIException;
-import com.codahale.metrics.health.HealthCheck;
-import io.dropwizard.Configuration;
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
+import com.bitsofproof.supernode.api.JMSServerConnector;
+import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Random;
+import javax.jms.ConnectionFactory;
 
-public abstract class SupernodeBundle<T extends Configuration> implements ConfiguredBundle<T>
+public class ActiveMQManagedBCSAPI implements ManagedBCSAPI
 {
-	private static final Logger log = LoggerFactory.getLogger(SupernodeBundle.class);
+	private static final Logger log = LoggerFactory.getLogger(ActiveMQManagedBCSAPI.class);
 
-	private ManagedBCSAPI managedBCSAPI;
+	public JMSServerConnector connector;
 
-	protected abstract SupernodeConfiguration getSupernodeConfiguration (T configuration);
+	private final ConnectionFactory pooledConnectionFactory;
 
-	@Override
-	public void run (T configuration, Environment environment) throws Exception
+	public ActiveMQManagedBCSAPI (ConnectionFactory pooledConnectionFactory)
 	{
-		// TODO Add Jackson ObjectMapper module for ExtendedKey mapping
-		// also, maybe a DBI mapper too
-
-		final SupernodeConfiguration supernode = getSupernodeConfiguration ( configuration );
-
-		log.info("Creating BCSAPI instance");
-		managedBCSAPI = supernode.createBCSAPI ();
-		log.info("Starting BCSAPI instance");
-		managedBCSAPI.start (); // start it early
-
-		environment.lifecycle ().manage ( managedBCSAPI );
-		environment.healthChecks ().register ( "supernode", new HealthCheck ()
-		{
-			@Override
-			protected Result check () throws Exception
-			{
-				try
-				{
-					managedBCSAPI.getBCSAPI ().ping ( new Random ().nextLong () );
-					return Result.healthy ( "Ping succeeded" );
-				}
-				catch (BCSAPIException be)
-				{
-					return Result.unhealthy ( be );
-				}
-
-			}
-		} );
+		this.pooledConnectionFactory = pooledConnectionFactory;
 	}
 
+	@Override
 	public BCSAPI getBCSAPI ()
 	{
-		return managedBCSAPI.getBCSAPI ();
+		Preconditions.checkState ( connector != null, "BCSAPI stopped" );
+		return connector;
 	}
 
 	@Override
-	public void initialize (Bootstrap<?> bootstrap)
+	public void start () throws Exception
 	{
+		if (connector == null)
+		{
+			log.info ( "Creating new Supernode server connector JMSServerConnector, implementation of BCSAPI" );
+			connector = new JMSServerConnector ();
+			connector.setConnectionFactory ( pooledConnectionFactory );
+			connector.init ();
+
+			boolean isprod = connector.isProduction ();
+			log.info ( "Supernode instance is production: " + isprod );
+		}
+	}
+
+	@Override
+	public void stop () throws Exception
+	{
+		if (connector != null)
+		{
+			log.info ( "Destroying Supernode server connector" );
+			connector.destroy ();
+			connector = null;
+		}
 	}
 }
