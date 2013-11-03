@@ -42,7 +42,7 @@ import org.apache.activemq.pool.PooledConnectionFactory;
 
 import javax.jms.ConnectionFactory;
 
-public class ActiveMQSupernodeConfiguration implements SupernodeConfiguration
+public class SupernodeConfigurationImpl implements SupernodeConfiguration
 {
 	@JsonProperty
 	private String brokerUrl;
@@ -53,8 +53,14 @@ public class ActiveMQSupernodeConfiguration implements SupernodeConfiguration
 	@JsonProperty
 	private String password;
 
+	@Override
 	public ManagedBCSAPI createBCSAPI ()
 	{
+		if (brokerUrl.startsWith ("test"))
+		{
+			return new ManagedAPIServerInABox ();
+		}
+
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory ( username, password, brokerUrl );
 		final ConnectionFactory pooledConnectionFactory = new PooledConnectionFactory ( connectionFactory );
 

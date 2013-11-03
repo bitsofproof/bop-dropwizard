@@ -9,11 +9,10 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.bitsofproof.dropwizard</groupId>
 	<artifactId>supernode-dropwizard</artifactId>
 
 	<properties>
-		<supernode.version>1.2.6</supernode.version>
+		<supernode.version>1.2-SNAPSHOT</supernode.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 
@@ -22,6 +21,18 @@
 			<groupId>com.bitsofproof</groupId>
 			<artifactId>bitsofproof-server-api</artifactId>
 			<version>${supernode.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bitsofproof</groupId>
+			<artifactId>bitsofproof-server</artifactId>
+			<version>${supernode.version}</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
