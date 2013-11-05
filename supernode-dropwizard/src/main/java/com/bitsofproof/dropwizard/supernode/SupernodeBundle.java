@@ -34,6 +34,7 @@
 
 package com.bitsofproof.dropwizard.supernode;
 
+import com.bitsofproof.dropwizard.supernode.jackson.SupernodeModule;
 import com.bitsofproof.supernode.api.BCSAPI;
 import com.bitsofproof.supernode.api.BCSAPIException;
 import com.codahale.metrics.health.HealthCheck;
@@ -57,8 +58,8 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 	@Override
 	public void run (T configuration, Environment environment) throws Exception
 	{
-		// TODO Add Jackson ObjectMapper module for ExtendedKey mapping
-		// also, maybe a DBI mapper too
+		// jackson module for JSON serialization
+		environment.getObjectMapper ().registerModule (new SupernodeModule());
 
 		final SupernodeConfiguration supernode = getSupernodeConfiguration ( configuration );
 
