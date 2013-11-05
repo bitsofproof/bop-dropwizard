@@ -32,7 +32,23 @@
 			<name>Bits of Proof Repository</name>
 			<url>http://maven.bitsofproof.com/maven</url>
 		</repository>
+		<repository>
+			<id>bitsofproof-internal</id>
+			<name>BitsOfProof Internal Repository</name>
+			<url>scpexe://maven.bitsofproof.com/home/maven/internal</url>
+		</repository>
 	</repositories>
+
+	<distributionManagement>
+		<downloadUrl>http://maven.bitsofproof.com/maven</downloadUrl>
+		<repository>
+			<id>bitsofproof-internal</id>
+			<uniqueVersion>false</uniqueVersion>
+			<name>BitsOfProof Internal Repository</name>
+			<url>scpexe://maven.bitsofproof.com/home/maven/internal</url>
+			<layout>default</layout>
+		</repository>
+	</distributionManagement>
 
 	<dependencyManagement>
 		<dependencies>
@@ -104,5 +120,15 @@
 				</executions>
 			</plugin>
 		</plugins>
+
+		<extensions>
+			<!-- Enabling the use of SSH -->
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.4</version>
+			</extension>
+		</extensions>
 	</build>
+
 </project>
