@@ -73,7 +73,6 @@
 				<configuration>
 					<tagNameFormat>@{project.artifactId}-@{project.version}</tagNameFormat>
 					<allowTimestampedSnapshots>true</allowTimestampedSnapshots>
-					<goals>install</goals>
 				</configuration>
 			</plugin>
 		</plugins>
