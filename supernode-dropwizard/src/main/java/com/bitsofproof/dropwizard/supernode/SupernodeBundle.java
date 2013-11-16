@@ -34,22 +34,26 @@
 
 package com.bitsofproof.dropwizard.supernode;
 
-import com.bitsofproof.dropwizard.supernode.jackson.SupernodeModule;
-import com.bitsofproof.supernode.api.BCSAPI;
-import com.bitsofproof.supernode.api.BCSAPIException;
-import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.bitsofproof.dropwizard.supernode.activemq.ManagedAPIServerInABox;
+import com.bitsofproof.dropwizard.supernode.jackson.SupernodeModule;
+import com.bitsofproof.supernode.api.BCSAPI;
+import com.bitsofproof.supernode.api.BCSAPIException;
+import com.bitsofproof.supernode.testbox.APIServerInABox;
+import com.codahale.metrics.health.HealthCheck;
+
 public abstract class SupernodeBundle<T extends Configuration> implements ConfiguredBundle<T>
 {
-	private static final Logger log = LoggerFactory.getLogger(SupernodeBundle.class);
+	private static final Logger log = LoggerFactory.getLogger (SupernodeBundle.class);
 
 	private ManagedBCSAPI managedBCSAPI;
 
@@ -59,38 +63,47 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 	public void run (T configuration, Environment environment) throws Exception
 	{
 		// jackson module for JSON serialization
-		environment.getObjectMapper ().registerModule (new SupernodeModule());
+		environment.getObjectMapper ().registerModule (new SupernodeModule ());
 
-		final SupernodeConfiguration supernode = getSupernodeConfiguration ( configuration );
+		final SupernodeConfiguration supernode = getSupernodeConfiguration (configuration);
 
-		log.info("Creating BCSAPI instance");
+		log.info ("Creating BCSAPI instance");
 		managedBCSAPI = supernode.createBCSAPI ();
-		log.info("Starting BCSAPI instance");
+		log.info ("Starting BCSAPI instance");
 		managedBCSAPI.start (); // start it early
 
-		environment.lifecycle ().manage ( managedBCSAPI );
-		environment.healthChecks ().register ( "supernode", new HealthCheck ()
+		environment.lifecycle ().manage (managedBCSAPI);
+		environment.healthChecks ().register ("supernode", new HealthCheck ()
 		{
 			@Override
 			protected Result check () throws Exception
 			{
 				try
 				{
-					managedBCSAPI.getBCSAPI ().ping ( new Random ().nextLong () );
-					return Result.healthy ( "Ping succeeded" );
+					managedBCSAPI.getBCSAPI ().ping (new Random ().nextLong ());
+					return Result.healthy ("Ping succeeded");
 				}
-				catch (BCSAPIException be)
+				catch ( BCSAPIException be )
 				{
-					return Result.unhealthy ( be );
+					return Result.unhealthy (be);
 				}
 
 			}
-		} );
+		});
 	}
 
 	public BCSAPI getBCSAPI ()
 	{
 		return managedBCSAPI.getBCSAPI ();
+	}
+
+	public APIServerInABox getBox ()
+	{
+		if ( managedBCSAPI instanceof ManagedAPIServerInABox )
+		{
+			return ((ManagedAPIServerInABox) managedBCSAPI).getBox ();
+		}
+		return null;
 	}
 
 	@Override
