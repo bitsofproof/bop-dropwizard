@@ -8,7 +8,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>supernode-dropwizard</artifactId>
-	<version>1.0.3</version>
+	<version>1.0.4-SNAPSHOT</version>
 
 	<properties>
 		<supernode.version>1.3.4</supernode.version>
@@ -17,7 +17,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@git.bitsofproof.com:bop-dropwizard.git</developerConnection>
-		<tag>supernode-dropwizard-1.0.3</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<dependencies>
