@@ -11,7 +11,7 @@
 	<version>1.0.3-SNAPSHOT</version>
 
 	<properties>
-		<supernode.version>1.3.5-SNAPSHOT</supernode.version>
+		<supernode.version>1.3.4</supernode.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 
