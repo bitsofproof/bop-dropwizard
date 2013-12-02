@@ -1,13 +1,14 @@
 package com.bitsofproof.dropwizard.supernode.jackson;
 
-import com.bitsofproof.supernode.wallet.Address;
+import com.bitsofproof.supernode.api.Address;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-public class SupernodeModule extends SimpleModule {
+public class SupernodeModule extends SimpleModule
+{
 
 	public SupernodeModule ()
 	{
-		addDeserializer (Address.class, new AddressDeserializer());
-		addSerializer (Address.class, new AddressSerializer());
+		addDeserializer (Address.class, new AddressDeserializer ());
+		addSerializer (Address.class, new AddressSerializer ());
 	}
 }

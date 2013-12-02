@@ -1,10 +1,10 @@
 package com.bitsofproof.dropwizard.supernode.validation;
 
-import com.bitsofproof.supernode.common.ValidationException;
-import com.bitsofproof.supernode.wallet.AddressConverter;
-
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+
+import com.bitsofproof.supernode.api.Address;
+import com.bitsofproof.supernode.common.ValidationException;
 
 public class BitcoinAddressValidator implements ConstraintValidator<BitcoinAddress, String>
 {
@@ -19,15 +19,17 @@ public class BitcoinAddressValidator implements ConstraintValidator<BitcoinAddre
 	@Override
 	public boolean isValid (String value, ConstraintValidatorContext context)
 	{
-		if (value == null)
+		if ( value == null )
+		{
 			return true;
+		}
 
 		try
 		{
-			AddressConverter.fromSatoshiStyle ( value, addressFlag );
+			Address.fromSatoshiStyle (value, addressFlag);
 			return true;
 		}
-		catch (ValidationException e)
+		catch ( ValidationException e )
 		{
 			return false;
 		}

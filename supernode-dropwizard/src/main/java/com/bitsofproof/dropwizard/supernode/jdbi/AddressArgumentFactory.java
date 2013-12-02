@@ -1,9 +1,10 @@
 package com.bitsofproof.dropwizard.supernode.jdbi;
 
-import com.bitsofproof.supernode.wallet.Address;
 import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.tweak.Argument;
 import org.skife.jdbi.v2.tweak.ArgumentFactory;
+
+import com.bitsofproof.supernode.api.Address;
 
 public class AddressArgumentFactory implements ArgumentFactory<Address>
 {
@@ -16,6 +17,6 @@ public class AddressArgumentFactory implements ArgumentFactory<Address>
 	@Override
 	public Argument build (Class<?> expectedType, Address value, StatementContext ctx)
 	{
-		return new AddressArgument(value);
+		return new AddressArgument (value);
 	}
 }
