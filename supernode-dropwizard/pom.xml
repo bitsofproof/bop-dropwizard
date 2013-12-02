@@ -15,6 +15,11 @@
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 
+	<scm>
+		<developerConnection>scm:git:git@git.bitsofproof.com:bop-dropwizard.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+	
 	<dependencies>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
@@ -72,7 +77,4 @@
 		</plugins>
 	</build>
 
-  <scm>
-    <tag>supernode-dropwizard-1.0.4</tag>
-  </scm>
 </project>
