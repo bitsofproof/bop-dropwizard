@@ -14,7 +14,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dropwizard.version>0.7.0-SNAPSHOT</dropwizard.version>
 		<guava.version>15.0</guava.version>
-		<shiro.version>1.2.2</shiro.version>
 		<jdbi.version>2.50</jdbi.version>
 	</properties>
 	<repositories>
