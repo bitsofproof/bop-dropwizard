@@ -17,12 +17,20 @@
 package com.bitsofproof.dropwizard.supernode.jackson;
 
 import com.bitsofproof.supernode.api.Transaction;
+import com.bitsofproof.supernode.common.WireFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.BeanProperty;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.deser.ContextualDeserializer;
 import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
+import com.fasterxml.jackson.databind.introspect.Annotated;
 
 import java.io.IOException;
+import java.util.Objects;
 
-public class TransactionDeserializer extends FromStringDeserializer<Transaction>
+public class TransactionDeserializer extends FromStringDeserializer<Transaction> implements ContextualDeserializer
 {
 	protected TransactionDeserializer ()
 	{
@@ -32,6 +40,40 @@ public class TransactionDeserializer extends FromStringDeserializer<Transaction>
 	@Override
 	protected Transaction _deserialize (String value, DeserializationContext ctxt) throws IOException
 	{
-		return Transaction.fromWireDump (value);
+		throw new IllegalStateException ("This method should be implemented by a subclass");
+	}
+
+	@Override
+	public JsonDeserializer<?> createContextual (DeserializationContext ctxt, BeanProperty property) throws JsonMappingException
+	{
+		if ( property != null )
+		{
+			JsonFormat.Value format = ctxt.getAnnotationIntrospector ().findFormat ((Annotated) property.getMember ());
+			if ( format != null && Objects.equals (TransactionSerializer.BASE64_FORMAT, format.getPattern ()) )
+			{
+				return new Base64TransactionDeserializer ();
+			}
+		}
+
+		return new HexTransactionDeserializer ();
+	}
+
+	private static class HexTransactionDeserializer extends TransactionDeserializer
+	{
+		@Override
+		protected Transaction _deserialize (String value, DeserializationContext ctxt) throws IOException
+		{
+			return Transaction.fromWireDump (value);
+		}
+	}
+
+	private static class Base64TransactionDeserializer extends TransactionDeserializer
+	{
+		@Override
+		protected Transaction _deserialize (String value, DeserializationContext ctxt) throws IOException
+		{
+			byte[] bytes = ctxt.getConfig ().getBase64Variant ().decode (value);
+			return Transaction.fromWire (new WireFormat.Reader (bytes));
+		}
 	}
 }
