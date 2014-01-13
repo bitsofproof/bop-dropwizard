@@ -21,12 +21,14 @@ import com.bitsofproof.dropwizard.supernode.SupernodeConfiguration;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.pool.PooledConnectionFactory;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.jms.ConnectionFactory;
 
 public class SupernodeConfigurationImpl implements SupernodeConfiguration
 {
 	@JsonProperty
+	@NotEmpty
 	private String brokerUrl;
 
 	@JsonProperty
