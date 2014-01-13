@@ -8,10 +8,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>supernode-dropwizard</artifactId>
-	<version>1.0.8-SNAPSHOT</version>
+	<version>1.0.9-SNAPSHOT</version>
 
 	<properties>
-		<supernode.version>2.0.2</supernode.version>
+		<supernode.version>2.1.8</supernode.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 
@@ -23,12 +23,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
-			<artifactId>bop-server-api</artifactId>
+			<artifactId>bitsofproof-server-api</artifactId>
 			<version>${supernode.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
-			<artifactId>bop-server</artifactId>
+			<artifactId>bitsofproof-server</artifactId>
 			<version>${supernode.version}</version>
 			<optional>true</optional>
 			<exclusions>
