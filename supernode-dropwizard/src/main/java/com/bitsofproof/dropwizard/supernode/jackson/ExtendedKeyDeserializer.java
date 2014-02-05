@@ -37,7 +37,7 @@ public class ExtendedKeyDeserializer extends StdScalarDeserializer<ExtendedKey>
 			}
 			catch (ValidationException e)
 			{
-				JsonMappingException.from (jp, "Error deserializing extended key", e);
+				throw JsonMappingException.from (jp, "Error deserializing extended key", e);
 			}
 		}
 

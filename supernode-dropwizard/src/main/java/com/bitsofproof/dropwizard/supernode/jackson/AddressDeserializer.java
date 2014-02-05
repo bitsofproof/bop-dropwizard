@@ -52,7 +52,7 @@ public class AddressDeserializer extends StdScalarDeserializer<Address>
 			}
 			catch ( ValidationException e )
 			{
-				JsonMappingException.from (jp, "Error deserializing bitcoin address", e);
+				throw JsonMappingException.from (jp, "Error deserializing bitcoin address", e);
 			}
 		}
 
