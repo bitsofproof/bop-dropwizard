@@ -26,7 +26,7 @@
 		<repository>
 			<id>bitsofproof</id>
 			<name>Bits of Proof Repository</name>
-			<url>http://maven.bitsofproof.com/maven</url>
+			<url>https://maven.bitsofproof.com/maven</url>
 		</repository>
 		<repository>
 			<id>bitsofproof-internal</id>
