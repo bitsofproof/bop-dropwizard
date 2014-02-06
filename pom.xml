@@ -3,12 +3,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.bitsofproof.dropwizard</groupId>
-	<artifactId>bop-dropwizard</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<artifactId>bop-dropwizard-parent</artifactId>
+	<version>1.0</version>
 	<modules>
 		<module>supernode-dropwizard</module>
 	</modules>
 	<packaging>pom</packaging>
+
+	<scm>
+		<developerConnection>scm:git:git@git.bitsofproof.com:bop-dropwizard.git</developerConnection>
+		<tag>HEAD</tag>
+	</scm>
+
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,22 +32,22 @@
 		<repository>
 			<id>bitsofproof</id>
 			<name>Bits of Proof Repository</name>
-			<url>https://maven.bitsofproof.com/maven</url>
+			<url>https://bitsofproof.com/maven</url>
 		</repository>
 		<repository>
 			<id>bitsofproof-internal</id>
 			<name>BitsOfProof Internal Repository</name>
-			<url>scpexe://maven.bitsofproof.com/home/maven/internal</url>
+			<url>scpexe://bitsofproof.com/home/maven/internal</url>
 		</repository>
 	</repositories>
 
 	<distributionManagement>
-		<downloadUrl>http://maven.bitsofproof.com/maven</downloadUrl>
+		<downloadUrl>https://bitsofproof.com/maven</downloadUrl>
 		<repository>
 			<id>bitsofproof-internal</id>
 			<uniqueVersion>false</uniqueVersion>
 			<name>BitsOfProof Internal Repository</name>
-			<url>scpexe://maven.bitsofproof.com/home/maven/internal</url>
+			<url>scpexe://bitsofproof.com/home/maven/internal</url>
 			<layout>default</layout>
 		</repository>
 	</distributionManagement>
