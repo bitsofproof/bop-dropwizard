@@ -2,24 +2,21 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.bitsofproof.dropwizard</groupId>
-	<artifactId>bop-dropwizard-parent</artifactId>
-	<version>1.2-SNAPSHOT</version>
-	<modules>
-		<module>supernode-dropwizard</module>
-	</modules>
-	<packaging>pom</packaging>
+	<artifactId>bop-dropwizard</artifactId>
+	<version>1.2.1-SNAPSHOT</version>
 
 	<scm>
-		<developerConnection>scm:git:git@git.bitsofproof.com:bop-dropwizard.git</developerConnection>
+		<developerConnection>scm:git:git@github.com:bitsofproof/bop-dropwizard.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
-
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dropwizard.version>0.7.0-rc1</dropwizard.version>
 		<guava.version>15.0</guava.version>
 		<jdbi.version>2.50</jdbi.version>
+		<supernode.version>[2.0,)</supernode.version>
+		<activemq.version>5.8.0</activemq.version>
 	</properties>
 	<repositories>
 		<repository>
@@ -31,12 +28,7 @@
 		<repository>
 			<id>bitsofproof</id>
 			<name>Bits of Proof Repository</name>
-			<url>https://bitsofproof.com/maven</url>
-		</repository>
-		<repository>
-			<id>bitsofproof-internal</id>
-			<name>BitsOfProof Internal Repository</name>
-			<url>scpexe://bitsofproof.com/home/maven/internal</url>
+			<url>https://bitsofproof.com/maven/</url>
 		</repository>
 	</repositories>
 
@@ -46,10 +38,54 @@
 			<id>bitsofproof-internal</id>
 			<uniqueVersion>false</uniqueVersion>
 			<name>BitsOfProof Internal Repository</name>
-			<url>scpexe://bitsofproof.com/home/maven/internal</url>
+			<url>scpexe://bitsofproof.com/home/maven/repository</url>
 			<layout>default</layout>
 		</repository>
 	</distributionManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.bitsofproof</groupId>
+			<artifactId>bitsofproof-server-api</artifactId>
+			<version>${supernode.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.bitsofproof</groupId>
+			<artifactId>bitsofproof-server</artifactId>
+			<version>${supernode.version}</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-log4j12</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>${activemq.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jdbi</groupId>
+			<artifactId>jdbi</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-validation</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
+	</dependencies>
 
 	<dependencyManagement>
 		<dependencies>
