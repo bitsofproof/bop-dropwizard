@@ -3,7 +3,7 @@
 
 	<groupId>com.bitsofproof.dropwizard</groupId>
 	<artifactId>bop-dropwizard-parent</artifactId>
-	<version>1.1</version>
+	<version>1.2-SNAPSHOT</version>
 	<modules>
 		<module>supernode-dropwizard</module>
 	</modules>
@@ -11,7 +11,7 @@
 
 	<scm>
 		<developerConnection>scm:git:git@git.bitsofproof.com:bop-dropwizard.git</developerConnection>
-		<tag>bop-dropwizard-parent-1.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 
