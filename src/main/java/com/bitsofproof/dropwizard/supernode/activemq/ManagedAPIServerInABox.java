@@ -16,14 +16,13 @@
 
 package com.bitsofproof.dropwizard.supernode.activemq;
 
+import java.io.IOException;
+
 import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
 import com.bitsofproof.supernode.api.BCSAPI;
 import com.bitsofproof.supernode.common.ValidationException;
-import com.bitsofproof.supernode.core.UnitTestChain;
+import com.bitsofproof.supernode.conf.UnitTestChain;
 import com.bitsofproof.supernode.testbox.APIServerInABox;
-import io.dropwizard.lifecycle.Managed;
-
-import java.io.IOException;
 
 public class ManagedAPIServerInABox implements ManagedBCSAPI
 {
@@ -34,9 +33,9 @@ public class ManagedAPIServerInABox implements ManagedBCSAPI
 	{
 		try
 		{
-			box = new APIServerInABox (new UnitTestChain());
+			box = new APIServerInABox (new UnitTestChain ());
 		}
-		catch (IOException | ValidationException e)
+		catch ( IOException | ValidationException e )
 		{
 			throw new RuntimeException (e);
 		}
@@ -58,7 +57,7 @@ public class ManagedAPIServerInABox implements ManagedBCSAPI
 		return box.getAPI ();
 	}
 
-	public APIServerInABox getBox()
+	public APIServerInABox getBox ()
 	{
 		return box;
 	}

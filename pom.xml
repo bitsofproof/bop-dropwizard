@@ -15,7 +15,7 @@
 		<dropwizard.version>0.7.0-rc1</dropwizard.version>
 		<guava.version>15.0</guava.version>
 		<jdbi.version>2.50</jdbi.version>
-		<supernode.version>[2.0,)</supernode.version>
+		<supernode.version>[3.0,)</supernode.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 	<repositories>
