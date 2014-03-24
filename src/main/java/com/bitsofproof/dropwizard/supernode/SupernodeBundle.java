@@ -16,22 +16,18 @@
 
 package com.bitsofproof.dropwizard.supernode;
 
+import com.bitsofproof.dropwizard.supernode.jackson.SupernodeModule;
+import com.bitsofproof.supernode.api.BCSAPI;
+import com.bitsofproof.supernode.api.BCSAPIException;
+import com.codahale.metrics.health.HealthCheck;
 import io.dropwizard.Configuration;
 import io.dropwizard.ConfiguredBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-
-import java.util.Random;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.bitsofproof.dropwizard.supernode.activemq.ManagedAPIServerInABox;
-import com.bitsofproof.dropwizard.supernode.jackson.SupernodeModule;
-import com.bitsofproof.supernode.api.BCSAPI;
-import com.bitsofproof.supernode.api.BCSAPIException;
-import com.bitsofproof.supernode.testbox.APIServerInABox;
-import com.codahale.metrics.health.HealthCheck;
+import java.util.Random;
 
 public abstract class SupernodeBundle<T extends Configuration> implements ConfiguredBundle<T>
 {
@@ -77,15 +73,6 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 	public BCSAPI getBCSAPI ()
 	{
 		return managedBCSAPI.getBCSAPI ();
-	}
-
-	public APIServerInABox getBox ()
-	{
-		if ( managedBCSAPI instanceof ManagedAPIServerInABox )
-		{
-			return ((ManagedAPIServerInABox) managedBCSAPI).getBox ();
-		}
-		return null;
 	}
 
 	@Override

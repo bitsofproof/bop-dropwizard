@@ -15,7 +15,7 @@
 		<dropwizard.version>0.7.0-rc1</dropwizard.version>
 		<guava.version>15.0</guava.version>
 		<jdbi.version>2.50</jdbi.version>
-		<supernode.version>[2.0,)</supernode.version>
+		<supernode.version>[3.3.0,)</supernode.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 	<repositories>
@@ -46,20 +46,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
-			<artifactId>bitsofproof-server-api</artifactId>
+			<artifactId>bop-bitcoin-server-api-jms</artifactId>
 			<version>${supernode.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>com.bitsofproof</groupId>
-			<artifactId>bitsofproof-server</artifactId>
-			<version>${supernode.version}</version>
-			<optional>true</optional>
-			<exclusions>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-log4j12</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
