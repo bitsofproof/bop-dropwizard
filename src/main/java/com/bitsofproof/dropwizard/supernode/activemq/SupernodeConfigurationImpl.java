@@ -40,11 +40,6 @@ public class SupernodeConfigurationImpl implements SupernodeConfiguration
 	@Override
 	public ManagedBCSAPI createBCSAPI ()
 	{
-		if (brokerUrl.startsWith ("test"))
-		{
-			return new ManagedAPIServerInABox ();
-		}
-
 		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory ( username, password, brokerUrl );
 		final ConnectionFactory pooledConnectionFactory = new PooledConnectionFactory ( connectionFactory );
 
