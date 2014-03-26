@@ -18,31 +18,27 @@
 		<supernode.version>[3.3,)</supernode.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>sonatype-oss-public</id>
-			<name>Sonatype Public</name>
-			<url>http://oss.sonatype.org/content/groups/public/</url>
-		</repository>
 
+	<repositories>
 		<repository>
 			<id>bitsofproof</id>
 			<name>Bits of Proof Repository</name>
-			<url>https://bitsofproof.com/maven/</url>
+			<url>https://bitsofproof.com/nexus/content/groups/public/</url>
 		</repository>
 	</repositories>
 
 	<distributionManagement>
-		<downloadUrl>https://bitsofproof.com/maven</downloadUrl>
 		<repository>
-			<id>bitsofproof-internal</id>
-			<uniqueVersion>false</uniqueVersion>
-			<name>BitsOfProof Internal Repository</name>
-			<url>scpexe://bitsofproof.com/home/maven/repository</url>
-			<layout>default</layout>
+			<id>bitsofproof</id>
+			<name>Internal Releases</name>
+			<url>https://bitsofproof.com/nexus/content/repositories/releases/</url>
 		</repository>
+		<snapshotRepository>
+			<id>bitsofproof</id>
+			<name>Internal Releases</name>
+			<url>https://bitsofproof.com/nexus/content/repositories/snapshots/</url>
+		</snapshotRepository>
 	</distributionManagement>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
