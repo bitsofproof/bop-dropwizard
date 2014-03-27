@@ -16,18 +16,19 @@
 
 package com.bitsofproof.dropwizard.supernode.activemq;
 
-import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
-import com.bitsofproof.supernode.api.BCSAPI;
-import com.bitsofproof.supernode.api.JMSServerConnector;
-import com.google.common.base.Preconditions;
+import javax.jms.ConnectionFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.jms.ConnectionFactory;
+import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
+import com.bitsofproof.supernode.api.BCSAPI;
+import com.bitsofproof.supernode.jms.JMSServerConnector;
+import com.google.common.base.Preconditions;
 
 public class ActiveMQManagedBCSAPI implements ManagedBCSAPI
 {
-	private static final Logger log = LoggerFactory.getLogger(ActiveMQManagedBCSAPI.class);
+	private static final Logger log = LoggerFactory.getLogger (ActiveMQManagedBCSAPI.class);
 
 	public JMSServerConnector connector;
 
@@ -41,31 +42,31 @@ public class ActiveMQManagedBCSAPI implements ManagedBCSAPI
 	@Override
 	public BCSAPI getBCSAPI ()
 	{
-		Preconditions.checkState ( connector != null, "BCSAPI stopped" );
+		Preconditions.checkState (connector != null, "BCSAPI stopped");
 		return connector;
 	}
 
 	@Override
 	public void start () throws Exception
 	{
-		if (connector == null)
+		if ( connector == null )
 		{
-			log.info ( "Creating new Supernode server connector JMSServerConnector, implementation of BCSAPI" );
+			log.info ("Creating new Supernode server connector JMSServerConnector, implementation of BCSAPI");
 			connector = new JMSServerConnector ();
-			connector.setConnectionFactory ( pooledConnectionFactory );
+			connector.setConnectionFactory (pooledConnectionFactory);
 			connector.init ();
 
 			boolean isprod = connector.isProduction ();
-			log.info ( "Supernode instance is production: " + isprod );
+			log.info ("Supernode instance is production: " + isprod);
 		}
 	}
 
 	@Override
 	public void stop () throws Exception
 	{
-		if (connector != null)
+		if ( connector != null )
 		{
-			log.info ( "Destroying Supernode server connector" );
+			log.info ("Destroying Supernode server connector");
 			connector.destroy ();
 			connector = null;
 		}
