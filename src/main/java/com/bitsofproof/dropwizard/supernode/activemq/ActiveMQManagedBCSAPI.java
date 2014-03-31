@@ -18,7 +18,7 @@ package com.bitsofproof.dropwizard.supernode.activemq;
 
 import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
 import com.bitsofproof.supernode.api.BCSAPI;
-import com.bitsofproof.supernode.api.JMSServerConnector;
+import com.bitsofproof.supernode.jms.JMSServerConnector;
 import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
