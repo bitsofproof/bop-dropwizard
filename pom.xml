@@ -35,14 +35,16 @@
 	</repositories>
 
 	<distributionManagement>
-		<downloadUrl>https://bitsofproof.com/maven</downloadUrl>
 		<repository>
-			<id>bitsofproof-internal</id>
-			<uniqueVersion>false</uniqueVersion>
-			<name>BitsOfProof Internal Repository</name>
-			<url>scpexe://bitsofproof.com/home/maven/repository</url>
-			<layout>default</layout>
+			<id>bitsofproof</id>
+			<name>bop repository</name>
+			<url>https://bitsofproof.com/nexus/content/repositories/releases</url>
 		</repository>
+		<snapshotRepository>
+			<id>bitsofproof</id>
+			<name>bop repository</name>
+			<url>https://bitsofproof.com/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
 
 	<dependencies>
