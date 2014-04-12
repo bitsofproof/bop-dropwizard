@@ -3,7 +3,7 @@
 
 	<groupId>com.bitsofproof.dropwizard</groupId>
 	<artifactId>bop-dropwizard</artifactId>
-	<version>1.3.2-SNAPSHOT</version>
+	<version>3.4.1-SNAPSHOT</version>
 
 	<scm>
 	     <connection>scm:git:git@github.com:bitsofproof/bop-dropwizard.git</connection>
@@ -16,8 +16,8 @@
 		<dropwizard.version>0.7.0-rc1</dropwizard.version>
 		<guava.version>15.0</guava.version>
 		<jdbi.version>2.50</jdbi.version>
-		<bop-bitcoin-server-jms.version>3.3.2-SNAPSHOT</bop-bitcoin-server-jms.version>
-		<bop-bitcoin-client-jms.version>3.3.2-SNAPSHOT</bop-bitcoin-client-jms.version>
+		<bop-bitcoin-client-api.version>3.4.1-SNAPSHOT</bop-bitcoin-client-api.version>
+		<bop-bitcoin-client-jms.version>3.4.1-SNAPSHOT</bop-bitcoin-client-jms.version>
 		<activemq.version>5.8.0</activemq.version>
 	</properties>
 	<repositories>
@@ -48,8 +48,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
-			<artifactId>bop-bitcoin-server-jms</artifactId>
-			<version>${bop-bitcoin-server-jms.version}</version>
+			<artifactId>bop-bitcoin-client-api</artifactId>
+			<version>${bop-bitcoin-client-api.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
