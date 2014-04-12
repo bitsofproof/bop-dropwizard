@@ -28,9 +28,9 @@
 		</repository>
 
 		<repository>
-			<id>bitsofproof</id>
-			<name>Bits of Proof Repository</name>
-			<url>https://bitsofproof.com/maven/</url>
+			<id>bitsofproof-public</id>
+			<name>bop internal repository</name>
+			<url>https://bitsofproof.com/nexus/content/groups/public</url>
 		</repository>
 	</repositories>
 
