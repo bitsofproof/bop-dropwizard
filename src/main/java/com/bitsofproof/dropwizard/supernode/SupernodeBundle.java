@@ -16,20 +16,18 @@
 
 package com.bitsofproof.dropwizard.supernode;
 
-import io.dropwizard.Configuration;
-import io.dropwizard.ConfiguredBundle;
-import io.dropwizard.setup.Bootstrap;
-import io.dropwizard.setup.Environment;
-
-import java.util.Random;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.bitsofproof.dropwizard.supernode.jackson.SupernodeModule;
 import com.bitsofproof.supernode.api.BCSAPI;
 import com.bitsofproof.supernode.api.BCSAPIException;
 import com.codahale.metrics.health.HealthCheck;
+import io.dropwizard.Configuration;
+import io.dropwizard.ConfiguredBundle;
+import io.dropwizard.setup.Bootstrap;
+import io.dropwizard.setup.Environment;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Random;
 
 public abstract class SupernodeBundle<T extends Configuration> implements ConfiguredBundle<T>
 {
@@ -49,15 +47,9 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 
 		log.info ("Creating BCSAPI instance");
 		managedBCSAPI = supernode.createBCSAPI ();
-		try
-		{
-			log.info ("Starting BCSAPI instance");
-			managedBCSAPI.start (); // start it early
-		}
-		catch ( IllegalStateException e )
-		{
-			log.warn ("BCSAPI not initialized"); // TODO: this is temp fix until testbox integrated
-		}
+		log.info ("Starting BCSAPI instance");
+		managedBCSAPI.start (); // start it early
+
 		environment.lifecycle ().manage (managedBCSAPI);
 		environment.healthChecks ().register ("supernode", new HealthCheck ()
 		{

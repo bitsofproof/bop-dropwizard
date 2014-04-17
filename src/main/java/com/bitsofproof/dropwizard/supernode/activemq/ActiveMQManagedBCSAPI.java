@@ -54,6 +54,9 @@ public class ActiveMQManagedBCSAPI implements ManagedBCSAPI
 			connector = new JMSServerConnector ();
 			connector.setConnectionFactory (pooledConnectionFactory);
 			connector.init ();
+
+			boolean isprod = connector.isProduction ();
+			log.info ("Supernode instance is production: " + isprod);
 		}
 	}
 
