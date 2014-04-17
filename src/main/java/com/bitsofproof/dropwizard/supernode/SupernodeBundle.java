@@ -51,7 +51,6 @@ public abstract class SupernodeBundle<T extends Configuration> implements Config
 		managedBCSAPI = supernode.createBCSAPI ();
 		try
 		{
-			managedBCSAPI.getBCSAPI ().isProduction ();
 			log.info ("Starting BCSAPI instance");
 			managedBCSAPI.start (); // start it early
 		}
