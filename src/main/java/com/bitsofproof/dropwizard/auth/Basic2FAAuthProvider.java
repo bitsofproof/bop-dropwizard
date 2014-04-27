@@ -25,11 +25,11 @@ public class Basic2FAAuthProvider<T> implements InjectableProvider<RestrictedTo,
 {
 	private static final Logger log = LoggerFactory.getLogger (Basic2FAAuthProvider.class);
 
+	public static final String OTP_HEADER = "X-BOP-OTP";
+
 	private static class Basic2FAAuthInjectable<T> extends AbstractHttpContextInjectable<T>
 	{
 		private static final String BASIC_PREFIX = "Basic";
-
-		private static final String OTP_HEADER = "X-BOP-OTP";
 
 		private static final String CHALLENGE_FORMAT = BASIC_PREFIX + " realm=\"%s\"";
 
