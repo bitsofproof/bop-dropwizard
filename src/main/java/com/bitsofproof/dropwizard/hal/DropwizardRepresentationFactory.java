@@ -40,6 +40,11 @@ public class DropwizardRepresentationFactory extends DefaultRepresentationFactor
 		this.uriInfo = uriInfo;
 	}
 
+	public UriInfo getUriInfo ()
+	{
+		return uriInfo;
+	}
+
 	@Override
 	public RepresentationWriter<String> lookupRenderer (String contentType)
 	{
