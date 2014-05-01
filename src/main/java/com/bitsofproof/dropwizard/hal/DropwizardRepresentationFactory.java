@@ -26,8 +26,6 @@ public class DropwizardRepresentationFactory extends DefaultRepresentationFactor
 		withRenderer (HAL_JSON, DropwizardRepresentationWriter.class);
 		withRenderer (APPLICATION_JSON, DropwizardRepresentationWriter.class);
 		withReader (HAL_JSON, JsonRepresentationReader.class);
-
-		withFlag (RepresentationFactory.SINGLE_ELEM_ARRAYS);
 	}
 
 	public void setMapper (ObjectMapper mapper)
