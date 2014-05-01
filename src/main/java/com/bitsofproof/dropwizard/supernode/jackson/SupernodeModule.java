@@ -19,6 +19,7 @@ package com.bitsofproof.dropwizard.supernode.jackson;
 import com.bitsofproof.supernode.api.Address;
 import com.bitsofproof.supernode.api.Transaction;
 import com.bitsofproof.supernode.common.ExtendedKey;
+import com.bitsofproof.supernode.common.Hash;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
@@ -36,10 +37,12 @@ public class SupernodeModule extends SimpleModule
 		addDeserializer (ExtendedKey.class, new ExtendedKeyDeserializer ());
 		addDeserializer (Address.class, new AddressDeserializer ());
 		addDeserializer (Transaction.class, new TransactionDeserializer());
+		addDeserializer (Hash.class, new HashDeserializer ());
 
 		addSerializer(ExtendedKey.class, new ExtendedKeySerializer ());
 		addSerializer (Address.class, new AddressSerializer ());
 		addSerializer (Transaction.class, new TransactionSerializer ());
+		addSerializer (Hash.class, new HashSerializer ());
 
 		setMixInAnnotation (ExtendedKey.class, IgnoreExtendedKeyIsReadOnly.class);
 	}
