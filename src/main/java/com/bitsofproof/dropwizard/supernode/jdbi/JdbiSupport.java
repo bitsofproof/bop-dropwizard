@@ -24,5 +24,6 @@ public class JdbiSupport
 	public static void supportSupernode(DBI dbi)
 	{
 		dbi.registerArgumentFactory (new AddressArgumentFactory());
+		dbi.registerArgumentFactory (new ExtendedKeyArgumentFactory());
 	}
 }
