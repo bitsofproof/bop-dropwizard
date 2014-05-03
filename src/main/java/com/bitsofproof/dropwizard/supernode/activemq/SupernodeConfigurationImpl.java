@@ -16,14 +16,14 @@
 
 package com.bitsofproof.dropwizard.supernode.activemq;
 
-import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
-import com.bitsofproof.dropwizard.supernode.SupernodeConfiguration;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.activemq.pool.PooledConnectionFactory;
 import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.jms.ConnectionFactory;
+import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
+import com.bitsofproof.dropwizard.supernode.SupernodeConfiguration;
+import com.bitsofproof.supernode.api.BCSAPI;
+import com.bitsofproof.supernode.connector.BCSAPIClient;
+import com.bitsofproof.supernode.jms.JMSConnectorFactory;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class SupernodeConfigurationImpl implements SupernodeConfiguration
 {
@@ -40,10 +40,27 @@ public class SupernodeConfigurationImpl implements SupernodeConfiguration
 	@Override
 	public ManagedBCSAPI createBCSAPI ()
 	{
-		ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory ( username, password, brokerUrl );
-		final ConnectionFactory pooledConnectionFactory = new PooledConnectionFactory ( connectionFactory );
+		final BCSAPIClient api = new BCSAPIClient ();
+		return new ManagedBCSAPI ()
+		{
+			@Override
+			public void start () throws Exception
+			{
+				api.setConnectionFactory (new JMSConnectorFactory (username, password, brokerUrl));
+				api.init ();
+			}
 
-		return new ActiveMQManagedBCSAPI ( pooledConnectionFactory );
+			@Override
+			public void stop () throws Exception
+			{
+			}
+
+			@Override
+			public BCSAPI getBCSAPI ()
+			{
+				return api;
+			}
+		};
 	}
 
 	public String getBrokerUrl ()
