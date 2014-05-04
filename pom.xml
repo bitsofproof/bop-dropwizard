@@ -15,6 +15,7 @@
 		<dropwizard.version>0.7.0</dropwizard.version>
 		<guava.version>15.0</guava.version>
 		<jdbi.version>2.50</jdbi.version>
+		<bop-bitcoin-server-core.version>3.5.0-SNAPSHOT</bop-bitcoin-server-core.version>
 		<bop-bitcoin-client-api.version>3.5.0-SNAPSHOT</bop-bitcoin-client-api.version>
 		<bop-bitcoin-client-jms.version>3.5.0-SNAPSHOT</bop-bitcoin-client-jms.version>
 		<activemq.version>5.8.0</activemq.version>
@@ -49,13 +50,21 @@
 		</dependency>
 		<dependency>
 			<groupId>com.bitsofproof</groupId>
+			<artifactId>bop-bitcoin-server-core</artifactId>
+			<version>${bop-bitcoin-server-core.version}</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.bitsofproof</groupId>
 			<artifactId>bop-bitcoin-client-jms</artifactId>
 			<version>${bop-bitcoin-client-jms.version}</version>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
 			<version>${activemq.version}</version>
+			<optional>true</optional>
 		</dependency>
 
 		<dependency>

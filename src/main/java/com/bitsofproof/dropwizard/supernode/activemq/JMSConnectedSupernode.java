@@ -25,7 +25,7 @@ import com.bitsofproof.supernode.connector.BCSAPIClient;
 import com.bitsofproof.supernode.jms.JMSConnectorFactory;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class SupernodeConfigurationImpl implements SupernodeConfiguration
+public class JMSConnectedSupernode implements SupernodeConfiguration
 {
 	@JsonProperty
 	@NotEmpty
