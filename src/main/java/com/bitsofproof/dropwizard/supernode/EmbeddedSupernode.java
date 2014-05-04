@@ -81,16 +81,8 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 			@Override
 			public void start () throws Exception
 			{
-				if ( injector == null )
-				{
-					injector = Guice.createInjector (environment,
-							new CloseableModule (),
-							new Jsr250Module (),
-							new EmbeddedSupernode.SupernodeConfigurationModule ());
-
-					api.setConnectionFactory (connectorFactory);
-					api.init ();
-				}
+				api.setConnectionFactory (connectorFactory);
+				api.init ();
 			}
 
 			@Override
@@ -104,5 +96,14 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 				return api;
 			}
 		};
+	}
+
+	@Override
+	public void init ()
+	{
+		injector = Guice.createInjector (environment,
+				new CloseableModule (),
+				new Jsr250Module (),
+				new EmbeddedSupernode.SupernodeConfigurationModule ());
 	}
 }
