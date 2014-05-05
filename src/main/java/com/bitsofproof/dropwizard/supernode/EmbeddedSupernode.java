@@ -16,6 +16,9 @@
 
 package com.bitsofproof.dropwizard.supernode;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.bitsofproof.supernode.api.BCSAPI;
 import com.bitsofproof.supernode.conf.DiscoveryModule;
 import com.bitsofproof.supernode.conf.NetworkModule;
@@ -34,6 +37,7 @@ import com.mycila.guice.ext.jsr250.Jsr250Module;
 
 public class EmbeddedSupernode implements SupernodeConfiguration
 {
+	private static final Logger log = LoggerFactory.getLogger (EmbeddedSupernode.class);
 	@JsonProperty
 	private NetworkModule network;
 
@@ -75,6 +79,7 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 			@Override
 			public void start () throws Exception
 			{
+				log.info ("Assembling embedded BOP Bitcoin Server...");
 				Injector injector = Guice.createInjector (environment,
 						new CloseableModule (),
 						new Jsr250Module (),
@@ -87,12 +92,15 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 				}
 
 				network.getStore ().cache (network.getChain (), 0);
+
+				log.info ("Connect to Bitcoin network...");
 				network.start ();
 
 				while ( network.getStore ().isLoading () )
 				{
 					Thread.sleep (1000);
 				}
+				log.info ("The embedded BOP Bitcoin Server is ready.");
 
 				api.setConnectionFactory (connectorFactory);
 				api.init ();

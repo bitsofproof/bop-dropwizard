@@ -17,6 +17,8 @@
 package com.bitsofproof.dropwizard.supernode.activemq;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.bitsofproof.dropwizard.supernode.ManagedBCSAPI;
 import com.bitsofproof.dropwizard.supernode.SupernodeConfiguration;
@@ -27,6 +29,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JMSConnectedSupernode implements SupernodeConfiguration
 {
+	private static final Logger log = LoggerFactory.getLogger (JMSConnectedSupernode.class);
+
 	@JsonProperty
 	@NotEmpty
 	private String brokerUrl;
@@ -46,6 +50,7 @@ public class JMSConnectedSupernode implements SupernodeConfiguration
 			@Override
 			public void start () throws Exception
 			{
+				log.info ("Connecting to BOP Bitcoin Server JMS " + brokerUrl);
 				api.setConnectionFactory (new JMSConnectorFactory (username, password, brokerUrl));
 				api.init ();
 			}
