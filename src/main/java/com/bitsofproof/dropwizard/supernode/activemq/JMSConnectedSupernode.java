@@ -92,9 +92,4 @@ public class JMSConnectedSupernode implements SupernodeConfiguration
 	{
 		this.password = password;
 	}
-
-	@Override
-	public void init ()
-	{
-	}
 }

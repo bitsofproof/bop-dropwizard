@@ -23,6 +23,7 @@ import com.bitsofproof.supernode.conf.StoreModule;
 import com.bitsofproof.supernode.connector.BCSAPIClient;
 import com.bitsofproof.supernode.connector.ConnectorFactory;
 import com.bitsofproof.supernode.connector.InMemoryConnectorFactory;
+import com.bitsofproof.supernode.core.BitcoinNetwork;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -48,14 +49,7 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 	@JsonProperty
 	private Stage environment;
 
-	private Injector injector;
-
 	private final ConnectorFactory connectorFactory = new InMemoryConnectorFactory ();
-
-	public Injector getInjector ()
-	{
-		return injector;
-	}
 
 	public class SupernodeConfigurationModule extends AbstractModule
 	{
@@ -81,6 +75,25 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 			@Override
 			public void start () throws Exception
 			{
+				Injector injector = Guice.createInjector (environment,
+						new CloseableModule (),
+						new Jsr250Module (),
+						new EmbeddedSupernode.SupernodeConfigurationModule ());
+
+				BitcoinNetwork network = injector.getInstance (BitcoinNetwork.class);
+				if ( network.getStore ().isEmpty () )
+				{
+					network.getStore ().resetStore (network.getChain ());
+				}
+
+				network.getStore ().cache (network.getChain (), 0);
+				network.start ();
+
+				while ( network.getStore ().isLoading () )
+				{
+					Thread.sleep (1000);
+				}
+
 				api.setConnectionFactory (connectorFactory);
 				api.init ();
 			}
@@ -96,14 +109,5 @@ public class EmbeddedSupernode implements SupernodeConfiguration
 				return api;
 			}
 		};
-	}
-
-	@Override
-	public void init ()
-	{
-		injector = Guice.createInjector (environment,
-				new CloseableModule (),
-				new Jsr250Module (),
-				new EmbeddedSupernode.SupernodeConfigurationModule ());
 	}
 }
