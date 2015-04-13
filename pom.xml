@@ -3,7 +3,7 @@
 
 	<groupId>com.bitsofproof.dropwizard</groupId>
 	<artifactId>bop-dropwizard</artifactId>
-	<version>3.7.8.2-SNAPSHOT</version>
+	<version>3.7.8.2</version>
 	<scm>
 	     <connection>scm:git:git@github.com:bitsofproof/bop-dropwizard.git</connection>
 		<developerConnection>scm:git:git@github.com:bitsofproof/bop-dropwizard.git</developerConnection>
